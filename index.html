@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vc me ama?</title>
+    <style>
+        body {
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            background-color: #f0f0f0;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+            flex-direction: column;
+        }
+
+        /* Botão "Não" (fujão) */
+        #botaoNao {
+            position: absolute;
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            font-size: 18px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        /* Botão "Sim" (fixo) */
+        #botaoSim {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            font-size: 18px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.2s;
+            position: relative;
+            z-index: 2;
+        }
+
+        #botaoSim:active {
+            background-color: #1e7e34;
+        }
+
+        /* Mensagem sobre a foto */
+        #mensagem {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 28px;
+            font-weight: bold;
+            text-align: center;
+            z-index: 11;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 15px 25px;
+            border-radius: 10px;
+        }
+
+        /* Foto ocupando a tela inteira */
+        #foto {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+            z-index: 10;
+        }
+    </style>
+</head>
+<body>
+    <div id="botoes">
+        <button id="botaoSim">🥰Sim💘</button>
+        <button id="botaoNao">😒Não😡</button>
+    </div>
+
+    <!-- Mensagem -->
+    <div id="mensagem">Sabia que você ia escolher o Sim <br>Te amo minha vida.. 😆</div>
+
+    <!-- Foto em tela cheia -->
+    <img id="foto" src="20251031_125056.jpg" alt="Foto nossa">
+
+    <script>
+        const botaoNao = document.getElementById('botaoNao');
+        const botaoSim = document.getElementById('botaoSim');
+        const foto = document.getElementById('foto');
+        const mensagem = document.getElementById('mensagem');
+
+        // Faz o botão "Não" fugir do mouse
+        botaoNao.addEventListener('mouseover', () => {
+            const larguraJanela = window.innerWidth;
+            const alturaJanela = window.innerHeight;
+            const larguraBotao = botaoNao.offsetWidth;
+            const alturaBotao = botaoNao.offsetHeight;
+
+            const novaPosX = Math.random() * (larguraJanela - larguraBotao);
+            const novaPosY = Math.random() * (alturaJanela - alturaBotao);
+
+            botaoNao.style.left = novaPosX + 'px';
+            botaoNao.style.top = novaPosY + 'px';
+        });
+
+        // Quando clicar no "Sim"
+        botaoSim.addEventListener('click', () => {
+            foto.style.display = 'block';          // mostra a foto
+            mensagem.style.display = 'block';      // mostra a mensagem
+            document.getElementById('botoes').style.display = 'none'; // esconde os botões
+        });
+    </script>
+</body>
+</html>
