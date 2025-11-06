@@ -1,161 +1,164 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vc me ama?</title>
-    <style>
-        body {
-            height: 100vh;
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            gap: 20px;
-            background-color: #f0f0f0;
-            overflow: hidden;
-            font-family: Arial, sans-serif;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vc me ama?</title>
+  <style>
+    body {
+      height: 100vh;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      gap: 20px;
+      background-color: #f0f0f0;
+      overflow: hidden;
+      font-family: Arial, sans-serif;
+    }
 
-        h1 {
-            margin: 0;
-        }
+    h1 { margin: 0; }
 
-        /* Botão "Não" (fujão) */
-        #botaoNao {
-            position: absolute;
-            background-color: #dc3545;
-            color: white;
-            border: none;
-            padding: 14px 28px;
-            font-size: 18px;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: 0.2s;
-            z-index: 5; /* acima do fundo mas abaixo da mensagem */
-        }
+    #botaoNao {
+      position: absolute;
+      background-color: #dc3245;
+      color: white;
+      border: none;
+      padding: 14px 28px;
+      font-size: 18px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.2s;
+      z-index: 5;
+    }
 
-        /* Botão "Sim" (fixo) */
-        #botaoSim {
-            background-color: #28a745;
-            color: white;
-            border: none;
-            padding: 14px 28px;
-            font-size: 18px;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: 0.2s;
-            position: relative;
-            z-index: 2;
-        }
+    #botaoSim {
+      background-color: #28a745;
+      color: white;
+      border: none;
+      padding: 14px 28px;
+      font-size: 18px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.2s;
+      position: relative;
+      z-index: 2;
+    }
 
-        #botaoSim:active {
-            background-color: #1e7e34;
-        }
+    #botaoSim:active { background-color: #1e7e34; }
 
-        /* Mensagem principal sobre a foto */
-        #mensagem {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: white;
-            font-size: 28px;
-            font-weight: bold;
-            text-align: center;
-            z-index: 11;
-            background: rgba(0, 0, 0, 0.5);
-            padding: 15px 25px;
-            border-radius: 10px;
-        }
+    #mensagem {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      font-size: 28px;
+      font-weight: bold;
+      text-align: center;
+      z-index: 11;
+      background: rgba(0, 0, 0, 0.5);
+      padding: 15px 25px;
+      border-radius: 10px;
+    }
 
-        /* Mensagem pequena de opção inválida */
-        #mensagemPequena {
-            display: none;
-            position: fixed;
-            top: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            color: white;
-            font-size: 18px;
-            background: rgba(0,0,0,0.7);
-            padding: 8px 16px;
-            border-radius: 8px;
-            z-index: 12;
-        }
+    #mensagemPequena {
+      display: none;
+      position: fixed;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: white;
+      font-size: 18px;
+      background: rgba(0,0,0,0.7);
+      padding: 8px 16px;
+      border-radius: 8px;
+      z-index: 12;
+    }
 
-        /* Foto ocupando a tela inteira */
-        #foto {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            object-fit: cover;
-            z-index: 10;
-        }
-    </style>
+    #foto {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+      z-index: 10;
+    }
+  </style>
 </head>
 <body>
-    <h1>Você me ama?</h1>
-    <div id="botoes">
-        <button id="botaoSim">🥰Sim💘</button>
-        <button id="botaoNao">😒Não😡</button>
-    </div>
+  <h1>Você me ama?</h1>
 
-    <!-- Mensagem principal -->
-    <div id="mensagem">Sabia que você ia escolher o Sim 😆<br>Te amo minha vida..</div>
+  <!-- Áudios ocultos -->
+  <audio id="musicaSim" loop>
+    <source src="eu-te-amo-bjo.mp3" type="audio/mpeg">
+  </audio>
 
-    <!-- Mensagem pequena de opção inválida -->
-    <div id="mensagemPequena">Opção inválida!</div>
+  <audio id="musicaNao">
+    <source src="eu-nao-quero.mp3" type="audio/mpeg">
+  </audio>
 
-    <!-- Foto em tela cheia -->
-    <img id="foto" src="20251031_125056.jpg" alt="Foto nossa">
+  <div id="botoes">
+    <button id="botaoSim">🥰Sim💘</button>
+    <button id="botaoNao">😒Não😡</button>
+  </div>
 
-    <script>
-        const botaoNao = document.getElementById('botaoNao');
-        const botaoSim = document.getElementById('botaoSim');
-        const foto = document.getElementById('foto');
-        const mensagem = document.getElementById('mensagem');
-        const mensagemPequena = document.getElementById('mensagemPequena');
+  <div id="mensagem">Sabia que você ia escolher o Sim 😆<br>Te amo minha vida..</div>
+  <div id="mensagemPequena">Opção inválida!</div>
+  <img id="foto" src="20251031_125056.jpg" alt="Foto nossa">
 
-        // Função para mover o botão "Não" para posição aleatória
-        function moverBotaoNao() {
-            const larguraJanela = window.innerWidth;
-            const alturaJanela = window.innerHeight;
-            const larguraBotao = botaoNao.offsetWidth;
-            const alturaBotao = botaoNao.offsetHeight;
+  <script>
+    const botaoNao = document.getElementById('botaoNao');
+    const botaoSim = document.getElementById('botaoSim');
+    const foto = document.getElementById('foto');
+    const mensagem = document.getElementById('mensagem');
+    const mensagemPequena = document.getElementById('mensagemPequena');
+    const musicaSim = document.getElementById('musicaSim');
+    const musicaNao = document.getElementById('musicaNao');
 
-            const novaPosX = Math.random() * (larguraJanela - larguraBotao);
-            const novaPosY = Math.random() * (alturaJanela - alturaBotao);
+    // Função para mover o botão "Não"
+    function moverBotaoNao() {
+      const larguraJanela = window.innerWidth;
+      const alturaJanela = window.innerHeight;
+      const larguraBotao = botaoNao.offsetWidth;
+      const alturaBotao = botaoNao.offsetHeight;
 
-            botaoNao.style.left = novaPosX + 'px';
-            botaoNao.style.top = novaPosY + 'px';
+      const novaPosX = Math.random() * (larguraJanela - larguraBotao);
+      const novaPosY = Math.random() * (alturaJanela - alturaBotao);
 
-            // Mostrar mensagem pequena de opção inválida
-            mensagemPequena.style.display = 'block';
-            clearTimeout(mensagemPequena._timeout); // limpa timeout anterior
-            mensagemPequena._timeout = setTimeout(() => {
-                mensagemPequena.style.display = 'none';
-            }, 1000); // desaparece depois de 1 segundo
-        }
+      botaoNao.style.left = novaPosX + 'px';
+      botaoNao.style.top = novaPosY + 'px';
 
-        // Eventos para desktop (mouseover) e mobile (touchstart)
-        botaoNao.addEventListener('mouseover', moverBotaoNao);
-        botaoNao.addEventListener('touchstart', (e) => {
-            e.preventDefault(); // evita click
-            moverBotaoNao();
-        });
+      // Mostrar mensagem pequena
+      mensagemPequena.style.display = 'block';
+      clearTimeout(mensagemPequena._timeout);
+      mensagemPequena._timeout = setTimeout(() => {
+        mensagemPequena.style.display = 'none';
+      }, 1000);
 
-        // Quando clicar no "Sim"
-        botaoSim.addEventListener('click', () => {
-            foto.style.display = 'block';          // mostra a foto
-            mensagem.style.display = 'block';      // mostra a mensagem principal
-            document.getElementById('botoes').style.display = 'none'; // esconde os botões
-        });
-    </script>
+      // Tocar som de "não quero"
+      musicaNao.currentTime = 0; // reinicia o áudio
+      musicaNao.play();
+    }
+
+    botaoNao.addEventListener('mouseover', moverBotaoNao);
+    botaoNao.addEventListener('touchstart', (e) => {
+      e.preventDefault();
+      moverBotaoNao();
+    });
+
+    // Quando clicar no "Sim"
+    botaoSim.addEventListener('click', () => {
+      foto.style.display = 'block';
+      mensagem.style.display = 'block';
+      document.getElementById('botoes').style.display = 'none';
+
+      musicaSim.play(); // toca a música romântica
+    });
+  </script>
 </body>
 </html>
